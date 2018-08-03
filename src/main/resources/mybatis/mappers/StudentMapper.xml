@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javase.springboot1.dao.IStudentDao">
+
+    <select id="queryById" resultType="student">
+        select id,username,password,age from student
+        <!-- where标签后紧跟着的第一个and字符会被截取-->
+        <where>
+            <if test="id != null">
+                and id  = #{id}
+            </if>
+            <if test="username != null">
+                and  username  = #{username}
+            </if>
+            <if test="password != null">
+                and  password = #{password}
+            </if>
+            <if test="age != null">
+                and  age  = #{age}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="addStudent" useGeneratedKeys="true" keyProperty="id">
+        insert into student values (#{id},#{username},#{password},#{age})
+    </insert>
+</mapper>

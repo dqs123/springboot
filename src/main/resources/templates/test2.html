@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>选择表达式</title>
+</head>
+<!--引入链接的格式为th:href=“@{/../..}”-->
+<link th:href="@{/bootstrap/css/bootstrap.css}">
+<body>
+    <!--获取后台传送的值,子类可以获取父类中的值-->
+    <div th:object="${session.userInfo}">
+        <p th:text="*{username}"></p>
+        <p th:text="*{age}"></p>
+        <p th:text="*{sex}"></p>
+    </div>
+    <!--括号里面表示传参-->
+    <a th:href="@{/editUser/{age}(age=${session.userInfo.age})}">按钮</a>
+
+    <!--拼接路径,括号里的参数会自动用&连接起来-->
+    <a th:href="@{'/editUser/'+${id}(age=${session.userInfo.age},sex=${session.userInfo.sex})}">按钮</a>
+
+    <!--插入tmp中的fragment值为TemPlate1的数据-->
+    <div th:insert="~{tmp :: TemPlate1}">
+        <a>1</a>
+    </div>
+    <!--插入-->
+    <div th:insert="~{tmp :: TemPlate2}">
+        <a>2</a>
+    </div>
+    <!--将tmp中的fragment值为TemPlate2的数据替换此div-->
+    <div th:replace="~{tmp :: TemPlate2}">
+        <a>3</a>
+    </div>
+</body>
+</html>

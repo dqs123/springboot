@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>常用的一些标签</title>
+</head>
+<body>
+    <table>
+        <!--几种常见的迭代关系-->
+        <tr>
+            <td>姓名</td>
+            <td>性别</td>
+        </tr>
+        <!--each分别遍历,user类似于之前的var变量-->
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <!--通过switch...case进行性别判断-->
+            <td th:switch="${user.sex}">
+                <b th:case="1">男</b>
+                <b th:case="0">女</b>
+            </td>
+
+            <!--通过三目运算符判断性别-->
+            <!--<td th:text="${user.sex=='1'}?'男':'女'"></td>-->
+
+            <!--通过if标签进行性别的判断-->
+            <!--<td th:if="${user.sex=='1'}">男</td>-->
+            <!--<td th:if="${user.sex=='0'}">女</td>-->
+        </tr>
+    </table>
+</body>
+</html>

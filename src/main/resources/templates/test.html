@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+
+    <h1 th:text="'text:'+${username}">hh</h1><br>
+    <!--th:utext是解析特殊字符-->
+    <h1 th:utext="'utext:'+${username}">hh</h1><br>
+    <input th:value="${username}"><br>
+
+    <h3 th:text="|这是一个th:text标签 ${username}|"></h3>
+    [[${1+1}]]
+    <br>
+    <!--行内获取参数-->
+    [[${userInfo.username}]]
+    [[${userInfo.age}]]
+    [[${userInfo.sex}]]
+    <br>
+    [[${session.userInfo.username}]]
+    <br>
+    [[${nowDate}]]
+    <br>
+    <b th:text="${#calendars.format(nowDate,'yyyy-MM-dd')}"></b>
+
+
+    <br>
+    不解析特殊字符:[[${username}]]<br>
+    解析特殊字符:[(${username})]
+
+</body>
+</html>
