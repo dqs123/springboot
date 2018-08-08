@@ -15,15 +15,25 @@ import java.util.List;
 public interface IStudentDao {
     /**
      * 查询学生信息
+     *
      * @param student
      * @return
      */
-    List<Student> queryById(Student student);
+    List<Student> queryStudent(Student student);
 
     /**
      * 添加学生
+     *
      * @param student
      * @return
      */
     int addStudent(Student student);
+
+    /**
+     * 查询单个学生的信息
+     *
+     * @param id
+     * @return
+     */
+    Student queryById(Integer id);
 }

@@ -3,19 +3,8 @@ server:
   port: 8083
   #项目访问路径
   servlet:
-    context-path: /javasm
+    context-path: /javase
 
-
-
-user:
-  useranme: 月儿
-  sex: '女'
-  age: '18'
-  birthday: 2000/7/31
-  hobbys:
-    -游泳
-    -跳舞
-  comments: {addr: 北京海淀, phone: 18679798888}
 
 #项目访问的优先级
 spring:
@@ -58,10 +47,21 @@ spring:
         test-on-borrow: false
         #归还连接时是否检测有效性
         test-on-return: false
+
+
+  #redis的配置
+  redis:
+    host: localhost
+    port: 6380
+    password: javase
+
+
+#mybatis的配置
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mappers/*.xml
   type-aliases-package: com.javase.springboot1.entity
+
 #设置commons-logging打印的级别
 #logging:
 #  #level是需要一个map, 我们讲需要屏蔽的包提高信息打印的level
