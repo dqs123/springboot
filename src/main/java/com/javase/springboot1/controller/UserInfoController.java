@@ -3,9 +3,11 @@ package com.javase.springboot1.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.javase.springboot1.contants.RedisContants;
+import com.javase.springboot1.entity.BaseModel;
 import com.javase.springboot1.entity.Student;
 import com.javase.springboot1.entity.UserInfo;
 import com.javase.springboot1.service.IStudentService;
+import com.javase.springboot1.util.AuthCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -175,6 +174,28 @@ public class UserInfoController {
         HashMap<String, Object> map = new HashMap<>();
         Student student = studentService.queryById(id);
         map.put("student", student);
+        BaseModel baseModel = new BaseModel();
+        baseModel.setData(map);
+        return baseModel;
+    }
+
+
+    /**
+     * 修改资源 --修改person
+     *
+     * @param id
+     * @param name
+     * @return
+     */
+//    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @PutMapping("/{id}")
+    @ResponseBody
+    @AuthCheck
+    public Object updPerson(@PathVariable("id") Integer id, String name) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("msg", "修改成功~");
+        map.put("id", id);
+        map.put("name", name);
         return map;
     }
 

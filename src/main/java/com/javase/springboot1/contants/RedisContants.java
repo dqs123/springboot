@@ -19,7 +19,7 @@ public class RedisContants {
     /**
      * 用户登录信息
      *
-     * login_session_1  表示用户1的登录信息
+     * @deprecated login_session_1  表示用户1的登录信息
      */
     public static final String LOGIN_SESSION = "login_session_";
 

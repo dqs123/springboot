@@ -1,6 +1,7 @@
 package com.javase.springboot1.config;
 
 import com.javase.springboot1.convert.DateConverter;
+import com.javase.springboot1.intercept.AuthInterceptor;
 import com.javase.springboot1.intercept.SessionIntercepter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,13 +57,18 @@ public class SimpleConfig implements WebMvcConfigurer {
 
     /**
      * 创建拦截器
+     * 拦截所有资源(排除登录页面和静态资源)
      *
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SessionIntercepter(redisTemplate)).addPathPatterns("/**").excludePathPatterns("/", "/login.html", "/user/login")//排除登录页面
-                .excludePathPatterns("/bootstrap/**");//排除静态资源
+        registry.addInterceptor(new SessionIntercepter(redisTemplate)).addPathPatterns("/**").
+                excludePathPatterns("/", "/login.html", "/user/login")
+                .excludePathPatterns("/bootstrap/**");
+
+        registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/bootstrap/**");
     }
 
     /**
